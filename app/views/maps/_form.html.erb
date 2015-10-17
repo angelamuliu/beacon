@@ -1,26 +1,24 @@
+<%= simple_form_for @map, :html => { class: "map-form" } do |f| %>
+  <% if @map.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@map.errors.count, "error") %> prohibited this map from being saved:</h2>
 
-
-<%= simple_form_for @map do |f| %>
-    <% if @map.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@map.errors.count, "error") %> prohibited this map from being saved:</h2>
-
-          <ul>
-          <% @map.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-    <%= f.input :convention_id, :collection => Convention.all, :selected => params[:convention_id] %>
-    <%= f.input :name, :label => "Map name/location" %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
-    <%= f.input :width, :label => "Width (px)" %>
-    <%= f.input :height, :label => "Height (px)" %>
-
-    <div class="actions">
-        <%= f.submit "Confirm" %>
+      <ul>
+        <% @map.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
+  <% end %>
+
+  <%= f.input :convention_id, :collection => Convention.all, :prompt => "Select Convention...", :selected => params[:convention_id], :label => false %>
+  <%= f.input :name, :placeholder => "Map name/location", :label => false, :input_html => { class: "form-control" } %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.input :width, :label => "Width (px)", :input_html => { class: "form-control" } %>
+  <%= f.input :height, :label => "Height (px)", :input_html => { class: "form-control" } %>
+
+  <div class="actions">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+  </div>
 <% end %>
